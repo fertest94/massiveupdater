@@ -1,0 +1,121 @@
+Quiero que desarrolles una aplicación web fullstack completa usando Node.js + Express (backend) y React + Vite (frontend), con TailwindCSS, Framer Motion y un acabado dark mode premium estilo Apple (minimalista, tipografía SF Pro, bordes redondeados, transparencias sutiles, sombras suaves, transiciones fluidas).
+
+La app se desplegará en Render y se vinculará al menú derecho de Bitrix24 para realizar modificaciones masivas en Contactos y/o Compañías, usando un webhook entrante para la conexión a Bitrix24.
+
+Objetivo de la app
+El usuario carga un archivo .xlsx o .csv con hasta 100,000 filas.
+
+Cada fila tiene:
+
+Una o más columnas clave (por ejemplo DNI, Email) para buscar registros en Bitrix24.
+
+Debe intentar buscar usando todas las claves en orden hasta encontrar coincidencia.
+
+Una o más columnas destino con valores nuevos para actualizar.
+
+Puede elegir si aplicar cambios a Contactos, Compañías o Ambos.
+
+La app muestra un Preview estilo importador Bitrix24 con:
+
+ID encontrado
+
+Campo destino
+
+Valor actual
+
+Valor nuevo
+
+Acción (Actualizar / Ignorar)
+
+Botones:
+
+Actualizar todo (ejecuta directo)
+
+Editar antes de aplicar (permite modificar la tabla antes de confirmar)
+
+Procesamiento en lotes usando batch API de Bitrix24.
+
+Botón de Deshacer cambios (solo sesión actual) para revertir a valores originales.
+
+Reporte final con:
+
+Total actualizados
+
+No encontrados (CSV descargable)
+
+Duplicados (CSV descargable)
+
+Seguridad
+Token secreto en variable APP_SECRET_TOKEN:
+
+La app solo funciona si la URL incluye ?token=TOKEN_SECRETO.
+
+Validación de dominio Bitrix24:
+
+Lista blanca en ALLOWED_DOMAINS (separada por comas).
+
+Si DOMAIN no coincide, rechazar acceso.
+
+Validar token + dominio en todas las rutas API.
+
+Frontend (React + Vite)
+Dark mode premium estilo Apple:
+
+Colores oscuros suaves, gradientes sutiles.
+
+Tipografía SF Pro.
+
+Bordes redondeados y sombras difusas.
+
+Transiciones suaves con Framer Motion.
+
+Efecto glassmorphism en modales y tooltips.
+
+Funcionalidad:
+
+Componente de tabla editable para preview.
+
+Drag & drop + botón de carga para Excel/CSV.
+
+Barra de progreso animada durante el procesamiento.
+
+Alertas flotantes elegantes y responsivas.
+
+Vista optimizada para usarse dentro de un iframe en Bitrix24.
+
+Backend (Node.js + Express)
+Parseo de Excel/CSV usando SheetJS.
+
+Lógica para buscar coincidencias en Bitrix24 vía webhook (process.env.BITRIX_WEBHOOK_URL).
+
+Uso de batch API para hasta 50 operaciones por request.
+
+Manejo de duplicados y no encontrados.
+
+Revertir cambios usando valores originales en memoria (solo sesión actual).
+
+Validación de token y dominio en todas las rutas API.
+
+CORS configurado para permitir solo dominios autorizados.
+
+Variables de entorno necesarias
+APP_SECRET_TOKEN → Token secreto para acceso.
+
+ALLOWED_DOMAINS → Lista de dominios Bitrix24 permitidos (coma separada).
+
+BITRIX_WEBHOOK_URL → URL del webhook entrante de Bitrix24.
+
+Compatibilidad de archivos
+.xlsx y .csv hasta 100k filas.
+
+Procesamiento en streaming/lotes para evitar problemas de memoria.
+
+Optimización
+Procesar lotes de hasta 50 operaciones con batch API.
+
+Respetar límite de 2 requests/seg para webhooks.
+
+Mostrar en UI feedback visual y animado del progreso.
+
+Entrega esperada:
+Una aplicación funcional, lista para correr en Replit y desplegarse en Render, con diseño premium dark mode estilo Apple, seguridad implementada, frontend y backend completos, y lista para integrarse en el menú derecho de Bitrix24.

@@ -1,0 +1,109 @@
+Quiero que desarrolles una aplicación web completa usando Next.js (última versión) con API Routes, TailwindCSS, Framer Motion y un acabado dark mode ultra refinado estilo Apple (minimalista, tipografía SF Pro, bordes redondeados, transparencias sutiles, sombras suaves, transiciones fluidas).
+
+La app se desplegará en Render y se vinculará al menú derecho de Bitrix24 para realizar modificaciones masivas en Contactos y/o Compañías, usando un webhook entrante para la conexión a Bitrix24.
+
+Objetivo de la app
+El usuario carga un archivo .xlsx o .csv con hasta 100,000 filas.
+
+Cada fila tiene:
+
+Una o más columnas clave (por ejemplo DNI, Email) para buscar registros en Bitrix24.
+
+Debe intentar buscar usando todas las claves en orden hasta encontrar coincidencia.
+
+Una o más columnas destino con valores nuevos para actualizar.
+
+Puede elegir si aplicar cambios a Contactos, Compañías o Ambos.
+
+La app muestra un Preview estilo importador Bitrix24 con:
+
+ID encontrado
+
+Campo destino
+
+Valor actual
+
+Valor nuevo
+
+Acción (Actualizar / Ignorar)
+
+Botones:
+
+Actualizar todo (ejecuta directo)
+
+Editar antes de aplicar (permite modificar la tabla antes de confirmar)
+
+Procesamiento en lotes usando batch API de Bitrix24.
+
+Botón de Deshacer cambios (solo sesión actual) para revertir a valores originales.
+
+Reporte final con:
+
+Total actualizados
+
+No encontrados (CSV descargable)
+
+Duplicados (CSV descargable)
+
+Seguridad
+Token secreto en variable APP_SECRET_TOKEN:
+
+La app solo funciona si la URL incluye ?token=TOKEN_SECRETO.
+
+Validación de dominio Bitrix24:
+
+Lista blanca en ALLOWED_DOMAINS (separada por comas).
+
+Si DOMAIN no coincide, rechazar acceso.
+
+Validar token + dominio en todas las rutas API.
+
+Frontend
+Next.js + TailwindCSS (dark mode premium).
+
+Framer Motion para animaciones tipo macOS:
+
+Fade-in suave de pantallas.
+
+Animación de carga tipo macOS spinning dots.
+
+Transiciones fluidas en cambios de vista.
+
+Drag & drop + botón para cargar Excel/CSV.
+
+Barra de progreso visual y animada durante la actualización masiva.
+
+Tabla editable para el preview.
+
+Alertas flotantes con diseño minimalista y blur sutil.
+
+Layout responsive y optimizado para usarse dentro de un iframe de Bitrix24.
+
+Backend (API Routes)
+Parseo de Excel/CSV con SheetJS.
+
+Lógica para buscar coincidencias en Bitrix24 vía webhook (process.env.BITRIX_WEBHOOK_URL).
+
+Uso de batch API para hasta 50 operaciones por request.
+
+Manejo de duplicados y no encontrados.
+
+Revertir cambios usando valores originales guardados en memoria de la sesión.
+
+Validación de token y dominio en todas las llamadas.
+
+Variables de entorno necesarias
+APP_SECRET_TOKEN → Token secreto para acceso.
+
+ALLOWED_DOMAINS → Lista de dominios Bitrix24 permitidos (coma separada).
+
+BITRIX_WEBHOOK_URL → URL del webhook entrante de Bitrix24.
+
+Compatibilidad de archivos
+.xlsx y .csv hasta 100k filas.
+
+Procesamiento en streaming/lotes para evitar problemas de memoria.
+
+Entrega esperada:
+Una app funcional y lista para producción que pueda ejecutarse en Replit y desplegarse en Render sin cambios, con diseño premium, seguridad activa, frontend y backend completos, y totalmente integrada para ser usada desde el menú derecho de Bitrix24.
+
